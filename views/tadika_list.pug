@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1= title
+
+  ul
+    each budak in budak_list
+      li
+        a(href=budak.namaPendaftaranTadika) #{budak.namaPendaftaranTadika} - #{budak.namaTaskaTadikaPendaftaranTadika}
+
+    else
+      li There are no genre.

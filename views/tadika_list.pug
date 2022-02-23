@@ -3,10 +3,23 @@ extends layout
 block content
   h1= title
 
-  ul
-    each budak in budak_list
-      li
-        a(href=budak.namaPendaftaranTadika) #{budak.namaPendaftaranTadika} - #{budak.namaTaskaTadikaPendaftaranTadika}
+  //- ul
+  //-   each budak in budak_list
+  //-     li
+  //-       a(href=budak.namaPendaftaranTadika) #{budak.namaPendaftaranTadika} - #{budak.namaTaskaTadikaPendaftaranTadika} - #{budak.kelasPendaftaranTadika} - #{budak.umurPendaftaranTadika}
 
-    else
-      li There are no genre.
+  //-   else
+  //-     li Tiada siapa disini.. cuma aku dan kamu
+
+  table(style='width:100%', border='1')
+    tr
+    th Nama
+    th Tadika
+    th Kelas
+    th Umur
+    each budak in budak_list
+      tr
+      td #{budak.namaPendaftaranTadika}
+      td #{budak.namaTaskaTadikaPendaftaranTadika}
+      td #{budak.kelasPendaftaranTadika}
+      td #{budak.umurPendaftaranTadika}

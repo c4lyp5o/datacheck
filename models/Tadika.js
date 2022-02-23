@@ -4,35 +4,35 @@ const TadikaSchema = mongoose.Schema({
     // negeri, daerah, kp is associated with each person
     createdByNegeri: {
         type: String,
-        required: true
+        //required: true
     },
     createdByDaerah: {
         type: String,
-        required: true
+        //required: true
     },
     createdByKp: {
         type: String,
-        required: true
+        //required: true
     },
     // --------------------------------------------------
     namaPendaftaranTadika: {
         type: String,
-        required: [true, 'Please provide nama'],
-        trim: true
+        //required: [true, 'Please provide nama'],
+        //trim: true
     },
     umurPendaftaranTadika: {
         type: String,
-        required: [true, 'Please provide umur'],
+        //required: [true, 'Please provide umur'],
     },
     kelasPendaftaranTadika: {
         type: String,
-        required: [true, 'Please provide kelas'],
-        trim: true
+        //required: [true, 'Please provide kelas'],
+        //trim: true
     },
     namaTaskaTadikaPendaftaranTadika: {
         type: String,
-        required: [true, 'Please provide nama taska/tadika'],
-        trim: true
+        //required: [true, 'Please provide nama taska/tadika'],
+        //trim: true
     }
 });
 

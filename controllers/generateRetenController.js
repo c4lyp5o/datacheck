@@ -5,10 +5,9 @@ const TadikaData = require('../models/Tadika');
 const fs = require('fs');
 const moment = require('moment');
 const json2csv = require('json2csv').parse;
-const fields = ['namaPendaftaranTadika', 'namaTaskaTadikaPendaftaranTadika'];
+const fields = ['namaPendaftaranTadika', 'namaTaskaTadikaPendaftaranTadika', 'umurPendaftaranTadika', 'kelasPendaftaranTadika'];
 const path = require('path');
 const Excel = require('exceljs');
-const { count } = require('console');
 
 // Display list of all Tadika Kids.
 exports.showTadikaData = function(req, res) {
@@ -23,9 +22,7 @@ exports.showTadikaData = function(req, res) {
 
 // Export data in csv format
 exports.pindahData = function(req, res) {
-    TadikaData.find()
-    .sort([['namaPendaftaranTadika', 'ascending']])
-    .exec(function (err, list_budak) {
+    TadikaData.find().sort([['namaPendaftaranTadika', 'ascending']]).exec(function (err, list_budak) {
       if (err) {
         return res.status(500).json({ err });
       }
@@ -44,8 +41,8 @@ exports.pindahData = function(req, res) {
           }
           else {
             setTimeout(function () {
-              fs.unlinkSync(filePath); // delete this file after 30 seconds
-            }, 30000)
+              fs.unlinkSync(filePath); // delete this file after 10 seconds
+            }, 10000)
             res.download(filePath);
           }
         });  
@@ -60,7 +57,7 @@ exports.pindahDataXlsx = async function(req, res) {
     await workbook.xlsx.readFile(filename);
     let worksheet = workbook.getWorksheet('Sheet1');
     let row = await worksheet.getRow(3);
-    console.log('done await');
+    console.log('done getting row');
     row.getCell(1).value = 'alhamdulillah';
     row.getCell(2).value = 'subhanAllah';
     row.getCell(3).value = 'Allahuakbar';
@@ -68,6 +65,9 @@ exports.pindahDataXlsx = async function(req, res) {
     const dateTime = moment().format('YYYYMMDDhhmmss');
     let newfile = path.join(__dirname, "..", "public", "exports", "CRA-" + dateTime + ".xlsx");
     await workbook.xlsx.writeFile(newfile);
+    setTimeout(function () {
+      fs.unlinkSync(newfile); // delete this file after 10 seconds
+    }, 10000)
     res.download(newfile);
 }
 

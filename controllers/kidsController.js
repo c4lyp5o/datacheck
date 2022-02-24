@@ -54,7 +54,9 @@ exports.kiddeletePost = function(req, res) {
         err.status = 404;
         return next(err);
      }
-    Tadika.findOneAndDelete(req.body.kidid);
-    console.log('Deleted ' + req.body.kidid);
-    res.redirect('/generate/senaraidata');
+    Tadika.findByIdAndDelete(req.body.kidid, function deleteKid(err) {
+        if (err) { return next(err); }
+        console.log('Deleted ' + req.body.kidid);
+        res.redirect('/generate/senaraidata');
+    });
 };

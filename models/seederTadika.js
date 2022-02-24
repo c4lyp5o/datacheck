@@ -5,76 +5,64 @@ const TadikaData = require("../models/Tadika");
 const newbudak = 
 [   
   new TadikaData({
-    namaPendaftaranTadika: "Abu Bakar",
+    namaPendaftaranTadika: "Maulana",
     umurPendaftaranTadika: "2",
     kelasPendaftaranTadika: "3 delima",
     namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Taman Nilam"
   }),
   new TadikaData({
-    namaPendaftaranTadika: "Umar",
+    namaPendaftaranTadika: "Satria",
     umurPendaftaranTadika: "3",
-    kelasPendaftaranTadika: "3 delima",
-    namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Taman Nilam"
-  }),
-  new TadikaData({
-    namaPendaftaranTadika: "Usman",
-    umurPendaftaranTadika: "4",
-    kelasPendaftaranTadika: "3 delima",
-    namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Taman Nilam"
-  }),
-  new TadikaData({
-    namaPendaftaranTadika: "Ali",
-    umurPendaftaranTadika: "5",
     kelasPendaftaranTadika: "4 nilam",
+    namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Taman Nuri"
+  }),
+  new TadikaData({
+    namaPendaftaranTadika: "Qutaibah",
+    umurPendaftaranTadika: "4",
+    kelasPendaftaranTadika: "5 intan",
     namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Teluk Wanjah"
   }),
   new TadikaData({
-    namaPendaftaranTadika: "Thalhah",
+    namaPendaftaranTadika: "Rizal",
+    umurPendaftaranTadika: "5",
+    kelasPendaftaranTadika: "3 delima",
+    namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Tualang"
+  }),
+  new TadikaData({
+    namaPendaftaranTadika: "Iskandar",
     umurPendaftaranTadika: "6",
     kelasPendaftaranTadika: "4 nilam",
-    namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Teluk Wanjah"
+    namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Taman Nilam"
   }),
   new TadikaData({
-    namaPendaftaranTadika: "Zubayr",
+    namaPendaftaranTadika: "Heriyanto",
     umurPendaftaranTadika: "2",
-    kelasPendaftaranTadika: "4 nilam",
-    namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Teluk Wanjah"
-  }),
-  new TadikaData({
-    namaPendaftaranTadika: "Saad",
-    umurPendaftaranTadika: "3",
-    kelasPendaftaranTadika: "2 mutiara",
+    kelasPendaftaranTadika: "5 intan",
     namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Taman Nuri"
   }),
   new TadikaData({
-    namaPendaftaranTadika: "Said",
+    namaPendaftaranTadika: "Budi",
+    umurPendaftaranTadika: "3",
+    kelasPendaftaranTadika: "3 delima",
+    namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Teluk Wanjah"
+  }),
+  new TadikaData({
+    namaPendaftaranTadika: "Aishah",
     umurPendaftaranTadika: "4",
-    kelasPendaftaranTadika: "2 mutiara",
-    namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Taman Nuri"
+    kelasPendaftaranTadika: "4 nilam",
+    namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Tualang"
   }),
   new TadikaData({
-    namaPendaftaranTadika: "Abdur Rahman",
+    namaPendaftaranTadika: "Luthfiyya",
     umurPendaftaranTadika: "5",
-    kelasPendaftaranTadika: "2 mutiara",
-    namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Taman Nuri"
+    kelasPendaftaranTadika: "5 intan",
+    namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Taman Nilam"
   }),
   new TadikaData({
-    namaPendaftaranTadika: "Abu Ubaidah",
+    namaPendaftaranTadika: "Madihah",
     umurPendaftaranTadika: "6",
-    kelasPendaftaranTadika: "4 rubi",
-    namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Tualang"
-  }),
-  new TadikaData({
-    namaPendaftaranTadika: "Muaz",
-    umurPendaftaranTadika: "2",
-    kelasPendaftaranTadika: "4 rubi",
-    namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Tualang"
-  }),
-  new TadikaData({
-    namaPendaftaranTadika: "Abu Hurairah",
-    umurPendaftaranTadika: "3",
-    kelasPendaftaranTadika: "4 rubi",
-    namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Tualang"
+    kelasPendaftaranTadika: "3 delima",
+    namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Taman Nuri"
   }),
 ]
 

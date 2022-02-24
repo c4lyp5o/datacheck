@@ -1,5 +1,5 @@
 'use strict';
-const TadikaData = require('../models/Tadika');
+const Tadika = require('../models/Tadika');
 // const YAData = require('../models/Sekolah'); to put in the future
 // const YAData = require('../models/YA'); to put in the future
 const fs = require('fs');
@@ -9,9 +9,29 @@ const fields = ['namaPendaftaranTadika', 'namaTaskaTadikaPendaftaranTadika', 'um
 const path = require('path');
 const Excel = require('exceljs');
 
+// Display generate menu
+exports.generate_menu = function(req, res) {
+  res.render('generateindex', { title: 'Laman Manipulasi Data' });
+}
+
+// Display generate menu for all data
+exports.generateaAllData = function(req, res) {
+  res.render('generateall', { title: 'Download Semua Data' });
+}
+
+// Post route for generate menu for all data
+exports.generateAllData_post = function(req, res) {
+  if (req.body.jenisFile == 'CSV') {
+    res.redirect('/generate/pindahdata/csv');
+  } else {
+    console.log('masuk ke xlsx');
+    res.send('NOT YET IMPLEMENTED');
+  }
+};
+
 // Display list of all Tadika Kids.
 exports.showTadikaData = function(req, res) {
-    TadikaData.find()
+    Tadika.find()
       .sort([['namaPendaftaranTadika', 'ascending']])
       .exec(function (err, list_budak) {
         if (err) { return next(err); }
@@ -20,9 +40,30 @@ exports.showTadikaData = function(req, res) {
       });
 };
 
+// Display form for tadika to generate reten
+exports.borangPilihReten = function(req, res) {
+  var search = 'Tabika Kemas Taman Nilam';
+  // Get all tadikas and kelas
+  Tadika.distinct('namaTaskaTadikaPendaftaranTadika', {nama: new RegExp(search)}, function(err, listtadika) {
+    if (err) { return next(err); }
+    // Successful, so render
+    // console.log(listtadika); debug purposes
+    res.render('generatereten', { title: 'Generate Reten', tadikas: listtadika });
+  });
+};
+
+// Post route for borangPilihReten
+exports.borangPilihReten_post = function(req, res) {
+  var x = req.body.tadikaNama;
+  var y = req.body.jenisReten
+  console.log(req.body.tadikaNama);
+  console.log(req.body.jenisReten);
+  res.send('Hello ' + x + ' & ' + y);
+};
+
 // Export data in csv format
-exports.pindahData = function(req, res) {
-    TadikaData.find().sort([['namaPendaftaranTadika', 'ascending']]).exec(function (err, list_budak) {
+exports.pindahDataCSV = function(req, res) {
+    Tadika.find().sort([['namaPendaftaranTadika', 'ascending']]).exec(function (err, list_budak) {
       if (err) {
         return res.status(500).json({ err });
       }
@@ -34,7 +75,7 @@ exports.pindahData = function(req, res) {
           return res.status(500).json({ err });
         }
         const dateTime = moment().format('YYYYMMDDhhmmss');
-        const filePath = path.join(__dirname, "..", "public", "exports", "csv-" + dateTime + ".csv")
+        const filePath = path.join(__dirname, "..", "public", "exports", `FullData-${dateTime}.csv`)
         fs.writeFile(filePath, csv, function (err) {
           if (err) {
             return res.json(err).status(500);
@@ -56,7 +97,7 @@ exports.pindahDataXlsx = async function(req, res) {
     let workbook = new Excel.Workbook();
     await workbook.xlsx.readFile(filename);
     let worksheet = workbook.getWorksheet('Sheet1');
-    let row = await worksheet.getRow(3);
+    let row = worksheet.getRow(3);
     console.log('done getting row');
     row.getCell(1).value = 'alhamdulillah';
     row.getCell(2).value = 'subhanAllah';
@@ -71,47 +112,28 @@ exports.pindahDataXlsx = async function(req, res) {
     res.download(newfile);
 }
 
-// Export data in xlsx format
-// exports.pindahDataXlsx = function(req, res) {
-
-//     // read the file
-//     const workbook = new Excel.Workbook();
-//     workbook.xslx.readFile(path.join(__dirname, "..", "public", "exports", "CRA.xlsx"));
-
-//     // get the data
-//     TadikaData.save(function (err, res) {
-//         if (err) {
-//             console.log('Error: ' + err);
-//         } else {
-//             const count = TadikaData.count({});
-//             const worksheet = workbook.getWorksheet('Sheet1');
-//             const row = worksheet.getRow(1);
-//             row.getCell(1).value = 'Nama Pendaftaran Tadika';
-//             row.getCell(2).value = 'Nama Taska Tadika Pendaftaran Tadika';
-//             row.commit();
-//             return workbook.xlsx.writeFile(path.join(__dirname, "..", "public", "exports", "CRA.xlsx"));
-//             res.download(path.join(__dirname, "..", "public", "exports", "CRA.xlsx"));
-//         }
-//     });
-// };
-
-//             const count = await TadikaData.count({});
-//             TadikaData.countDocuments({}, function(err, count) {
-//                 console.log('Count is ' + count);
-
-//                 // get the sheet
-
-//                 const worksheet = workbook.getWorksheet('Sheet1');
-
-//                 // get the cell
-
-//                 const cell = worksheet.getCell('A1');
-
-//                 // set the value
-
-//                 cell.value = count;
-//                 res.download(path.join(__dirname, "..", "public", "exports", "CRA.xlsx"));
-//                 });
-//             }
-//     });
-// }
+// Count data and export in xlsx format
+exports.kiradataXlsx = async function(req, res) {
+  Tadika.countDocuments().exec( async function (err, count) {
+    if (err) {
+      return res.status(500).json({ err });
+    }
+    else {
+      console.log(count);
+      let filename = path.join(__dirname, "..", "public", "exports", "CRA.xlsx");
+      let workbook = new Excel.Workbook();
+      await workbook.xlsx.readFile(filename);
+      let worksheet = workbook.getWorksheet('Sheet1');
+      let row = worksheet.getRow(2);
+      row.getCell(1).value = count;
+      row.commit();
+      const dateTime = moment().format('YYYYMMDDhhmmss');
+      let newfile = path.join(__dirname, "..", "public", "exports", "CRA-" + dateTime + ".xlsx");
+      await workbook.xlsx.writeFile(newfile);
+      setTimeout(function () {
+        fs.unlinkSync(newfile); // delete this file after 10 seconds
+      }, 10000)
+      res.download(newfile);
+    }
+  }
+)};

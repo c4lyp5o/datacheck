@@ -2,4 +2,34 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+
+  div.container
+    label(for='Pelajar')
+    p Jumlah pelajar tadika adalah: #{jumlahPelajar}
+
+  div.container
+    label(for='Tadika')
+    p Senarai tadika adalah:
+    ul
+      each val in namaTadika
+        li= val
+
+  div.container
+    label(for='Pelajar')
+    p Jumlah Pelajar Berdasarkan Tadika
+    ul 
+    li Tabika Kemas Taman Nilam: #{jTN}
+    li Tabika Kemas Taman Nuri: #{jTNuri}
+    li Tabika Kemas Teluk Wanjah: #{jTWJ}
+    li Tabika Kemas Tualang: #{jTT}
+
+  div.container
+    label(for='umurPelajar')
+    p Jumlah Pelajar Berdasarkan Umur
+    ul
+    li Umur 1 Tahun: #{jumlahUmur1}
+    li Umur 2 Tahun: #{jumlahUmur2}
+    li Umur 3 Tahun: #{jumlahUmur3}
+    li Umur 4 Tahun: #{jumlahUmur4}
+    li Umur 5 Tahun: #{jumlahUmur5}
+    li Umur 6 Tahun: #{jumlahUmur6}

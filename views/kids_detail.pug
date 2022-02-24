@@ -1,0 +1,14 @@
+extends layoutgen
+
+block content
+
+  h1 Nama murid: #{nama.namaPendaftaranTadika}
+
+  div(style='margin-left:20px;margin-top:20px')
+    p Kelas: #{nama.kelasPendaftaranTadika}
+    p Umur: #{nama.umurPendaftaranTadika}
+    p Nama Tadika: #{nama.namaTaskaTadikaPendaftaranTadika}
+
+  hr
+  p 
+    a(href=nama.id+'/delete') Hapus Murid

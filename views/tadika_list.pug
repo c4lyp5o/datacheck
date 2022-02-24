@@ -1,4 +1,4 @@
-extends layout
+extends layoutgen
 
 block content
   h1= title
@@ -6,7 +6,7 @@ block content
   //- ul
   //-   each budak in budak_list
   //-     li
-  //-       a(href=budak.namaPendaftaranTadika) #{budak.namaPendaftaranTadika} - #{budak.namaTaskaTadikaPendaftaranTadika} - #{budak.kelasPendaftaranTadika} - #{budak.umurPendaftaranTadika}
+  //-       a(href=budak.id) #{budak.namaPendaftaranTadika} - #{budak.namaTaskaTadikaPendaftaranTadika} - #{budak.kelasPendaftaranTadika} - #{budak.umurPendaftaranTadika}
 
   //-   else
   //-     li Tiada siapa disini.. cuma aku dan kamu
@@ -19,7 +19,9 @@ block content
     th Umur
     each budak in budak_list
       tr
-      td #{budak.namaPendaftaranTadika}
+      td 
+        - var url = 'http://localhost:3000/kids/' + budak.id
+        a(href=url) #{budak.namaPendaftaranTadika}
       td #{budak.namaTaskaTadikaPendaftaranTadika}
       td #{budak.kelasPendaftaranTadika}
       td #{budak.umurPendaftaranTadika}

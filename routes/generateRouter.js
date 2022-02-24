@@ -3,11 +3,16 @@ const express = require('express');
 const router = express.Router();
 
 // Controller
-const generate_Reten = require ('../controllers/generateRetenController');
+const generatecon = require ('../controllers/generateRetenController');
 
 // Routes
-router.get('/', generate_Reten.showTadikaData);
-router.get('/pindahData', generate_Reten.pindahData);
-router.get('/pindahDataXlsx', generate_Reten.pindahDataXlsx);
+router.get('/', generatecon.generate_menu);
+router.get('/senaraidata', generatecon.showTadikaData);
+router.get('/pindahData', generatecon.generateaAllData);
+router.get('/pilihreten', generatecon.borangPilihReten);
+router.post('/pilihreten', generatecon.borangPilihReten_post);
+router.get('/pindahdataXlsxcount', generatecon.kiradataXlsx);
+router.post('/pindahdata', generatecon.generateAllData_post );
+router.get('/pindahdata/csv', generatecon.pindahDataCSV);
 
 module.exports = router;

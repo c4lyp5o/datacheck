@@ -5,8 +5,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
 
-const indexRouter = require('./routes/index');
-// var usersRouter = require('./routes/users');
+const indexRouter = require('./routes/indexRouter');
+const kidsRouter = require('./routes/kidsRouter');
 const genRouter = require('./routes/generateRouter');
 
 var app = express();
@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public/exports')));
 
 app.use('/', indexRouter);
-// app.use('/users', usersRouter);
+app.use('/kids', kidsRouter);
 app.use('/generate', genRouter);
 
 // init DB

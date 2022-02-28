@@ -144,8 +144,12 @@ exports.kiradataXlsx = async function(req, res) {
 )};
 
 // Make report for all tadika
-exports.reportAllTadika = async function(req, res) {
-  countHelper.filterbyDaerah(req, res);
+exports.reportforTadika = async (req, res) => {
+  await Helper.prepareDocumentLaporan(req, res);
+  countHelper.kiraKedah(req, res);
+  let newfile = path.join(__dirname, "..", "public", "exports", "Kedah-Report.xlsx");
+  res.download(newfile);
+  //console.log(alltheData);
   // await Helper.prepareDocument(req, res);
   // Tadika.aggregate([
   //       { $match: { /* Query can go here, if you want to filter results. */ } } 
@@ -181,4 +185,8 @@ exports.reportAllTadika = async function(req, res) {
   //     console.log('done preparing document');
   //     res.download(newfile);
   // });
+};
+
+exports.kiraKedahwei = function(req, res) {
+  countHelper.kiraKedah(req, res);
 };

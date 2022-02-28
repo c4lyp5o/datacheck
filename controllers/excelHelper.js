@@ -36,6 +36,9 @@ exports.prepareDocumentLaporan = async function(req, res) {
     let newfile = path.join(__dirname, "..", "public", "exports", "blank-template.xlsx");
     await workbook.xlsx.writeFile(newfile);
     console.log('done preparing document');
+    setTimeout(function () {
+        fs.unlinkSync(newfile); // delete this file after 10 seconds
+      }, 30000)
 };
 
 exports.tryNew = async function(req, res) {

@@ -2,7 +2,6 @@
 const Tadika = require('../models/Tadika');
 const Helper = require('./excelHelper');
 const countHelper = require('./countHelper');
-// const Count = require('./countHelper');
 // const YAData = require('../models/Sekolah'); to put in the future
 // const YAData = require('../models/YA'); to put in the future
 const fs = require('fs');
@@ -147,8 +146,6 @@ exports.kiradataXlsx = async function(req, res) {
 exports.reportforTadika = async (req, res) => {
   await Helper.prepareDocumentLaporan(req, res);
   countHelper.kiraKedah(req, res);
-  let newfile = path.join(__dirname, "..", "public", "exports", "Kedah-Report.xlsx");
-  res.download(newfile);
   //console.log(alltheData);
   // await Helper.prepareDocument(req, res);
   // Tadika.aggregate([

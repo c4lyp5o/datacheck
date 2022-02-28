@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1= title
+
+  div.container
+    label(for='Pelajar')
+    p Jumlah pelajar tadika adalah: 
+
+  div.container
+    label(for='Tadika')
+    each val in allresult
+      li Nama Tadika: #{val._id.tadika}
+      li Jumlah Pelajar: #{val.count}
+      li KP yang handle: #{val._id.kp}
+      li Daerah: #{val._id.daerah}
+      li Negeri: #{val._id.negeri}
+      br

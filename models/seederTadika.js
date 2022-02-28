@@ -5,64 +5,112 @@ const TadikaData = require("../models/Tadika");
 const newbudak = 
 [   
   new TadikaData({
-    namaPendaftaranTadika: "Maulana",
-    umurPendaftaranTadika: "2",
-    kelasPendaftaranTadika: "3 delima",
-    namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Taman Nilam"
-  }),
-  new TadikaData({
-    namaPendaftaranTadika: "Satria",
-    umurPendaftaranTadika: "3",
-    kelasPendaftaranTadika: "4 nilam",
-    namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Taman Nuri"
-  }),
-  new TadikaData({
-    namaPendaftaranTadika: "Qutaibah",
+    createdByNegeri: "Kedah",
+    createdByDaerah: "Kuala Muda",
+    createdByKp: "KP Taman Segar",
+    namaPendaftaranTadika: "Fauzan bin Arif",
     umurPendaftaranTadika: "4",
-    kelasPendaftaranTadika: "5 intan",
-    namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Teluk Wanjah"
+    kelasPendaftaranTadika: "1 delima",
+    namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Taman Segar"
   }),
   new TadikaData({
-    namaPendaftaranTadika: "Rizal",
+    createdByNegeri: "Kedah",
+    createdByDaerah: "Kuala Muda",
+    createdByKp: "KP Taman Segar",
+    namaPendaftaranTadika: "Ariffin bin Samsudin",
     umurPendaftaranTadika: "5",
-    kelasPendaftaranTadika: "3 delima",
-    namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Tualang"
+    kelasPendaftaranTadika: "2 nilam",
+    namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Taman Segar"
   }),
   new TadikaData({
-    namaPendaftaranTadika: "Iskandar",
+    createdByNegeri: "Kedah",
+    createdByDaerah: "Yan",
+    createdByKp: "KP Sungai Limau",
+    namaPendaftaranTadika: "Syed Farhan bin Syed Aqil",
     umurPendaftaranTadika: "6",
-    kelasPendaftaranTadika: "4 nilam",
-    namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Taman Nilam"
+    kelasPendaftaranTadika: "3 intan",
+    namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Simpang Limau"
   }),
   new TadikaData({
-    namaPendaftaranTadika: "Heriyanto",
-    umurPendaftaranTadika: "2",
-    kelasPendaftaranTadika: "5 intan",
-    namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Taman Nuri"
-  }),
-  new TadikaData({
-    namaPendaftaranTadika: "Budi",
-    umurPendaftaranTadika: "3",
-    kelasPendaftaranTadika: "3 delima",
-    namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Teluk Wanjah"
-  }),
-  new TadikaData({
-    namaPendaftaranTadika: "Aishah",
+    createdByNegeri: "Kedah",
+    createdByDaerah: "Sik",
+    createdByKp: "KP Gulau",
+    namaPendaftaranTadika: "Fatimah bin Muhammad",
     umurPendaftaranTadika: "4",
-    kelasPendaftaranTadika: "4 nilam",
-    namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Tualang"
+    kelasPendaftaranTadika: "1 delima",
+    namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Gulau"
   }),
   new TadikaData({
-    namaPendaftaranTadika: "Luthfiyya",
+    createdByNegeri: "Perlis",
+    createdByDaerah: "Beseri",
+    createdByKp: "KP Beseri",
+    namaPendaftaranTadika: "Ibrahim bin Suhaim",
+    umurPendaftaranTadika: "4",
+    kelasPendaftaranTadika: "1 berani",
+    namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Brejak"
+  }),
+  new TadikaData({
+    createdByNegeri: "Perlis",
+    createdByDaerah: "Beseri",
+    createdByKp: "KP Beseri",
+    namaPendaftaranTadika: "Mohd Ali bin Zubir",
     umurPendaftaranTadika: "5",
-    kelasPendaftaranTadika: "5 intan",
-    namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Taman Nilam"
+    kelasPendaftaranTadika: "2 adil",
+    namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Brejak"
   }),
   new TadikaData({
-    namaPendaftaranTadika: "Madihah",
+    createdByNegeri: "Perlis",
+    createdByDaerah: "Kuala Perlis",
+    createdByKp: "KP Kuala Perlis",
+    namaPendaftaranTadika: "Nabilah binti Amran",
     umurPendaftaranTadika: "6",
-    kelasPendaftaranTadika: "3 delima",
-    namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Taman Nuri"
+    kelasPendaftaranTadika: "3 cerdik",
+    namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Kuala Perlis"
+  }),
+  new TadikaData({
+    createdByNegeri: "Perlis",
+    createdByDaerah: "Kuala Perlis",
+    createdByKp: "KP Kuala Perlis",
+    namaPendaftaranTadika: "Nur Fadzilah binti Zain",
+    umurPendaftaranTadika: "4",
+    kelasPendaftaranTadika: "1 bersih",
+    namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Kuala Perlis"
+  }),
+  new TadikaData({
+    createdByNegeri: "Selangor",
+    createdByDaerah: "Tanjong Karang",
+    createdByKp: "KP Sungai Buloh",
+    namaPendaftaranTadika: "Syafiqah binti Mohd Arif",
+    umurPendaftaranTadika: "4",
+    kelasPendaftaranTadika: "1 siddiq",
+    namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Taman Baru"
+  }),
+  new TadikaData({
+    createdByNegeri: "Selangor",
+    createdByDaerah: "Tanjung Karang",
+    createdByKp: "KP Sungai Buloh",
+    namaPendaftaranTadika: "Syahidah binti Mansor",
+    umurPendaftaranTadika: "5",
+    kelasPendaftaranTadika: "2 fathanah",
+    namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Taman Baru"
+  }),
+  new TadikaData({
+    createdByNegeri: "Selangor",
+    createdByDaerah: "Melawati",
+    createdByKp: "KP Melawati",
+    namaPendaftaranTadika: "Zulfadli bin Ahmad",
+    umurPendaftaranTadika: "6",
+    kelasPendaftaranTadika: "3 amanah",
+    namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Melawati"
+  }),
+  new TadikaData({
+    createdByNegeri: "Selangor",
+    createdByDaerah: "Melawati",
+    createdByKp: "KP Melawati",
+    namaPendaftaranTadika: "Rafika Dewi binti Abdul Razak",
+    umurPendaftaranTadika: "4",
+    kelasPendaftaranTadika: "1 tabligh",
+    namaTaskaTadikaPendaftaranTadika: "Tabika Kemas Melawati"
   }),
 ]
 

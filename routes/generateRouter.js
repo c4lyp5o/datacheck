@@ -14,5 +14,7 @@ router.post('/pilihreten', generatecon.borangPilihReten_post);
 router.get('/pindahdataXlsxcount', generatecon.kiradataXlsx);
 router.post('/pindahdata', generatecon.generateAllData_post );
 router.get('/pindahdata/csv', generatecon.pindahDataCSV);
+router.get('/pilihreten/generatereport', generatecon.reportAllTadika);
+router.get('/try', generatecon.reportAllTadika);
 
 module.exports = router;

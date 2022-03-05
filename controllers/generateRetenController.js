@@ -26,8 +26,7 @@ exports.generateAllData_post = function(req, res) {
   if (req.body.jenisFile == 'CSV') {
     res.redirect('/generate/pindahdata/csv');
   } else {
-    console.log('masuk ke xlsx');
-    res.send('NOT YET IMPLEMENTED');
+    res.redirect('/generate/pindahdata/xlsx');
   }
 };
 
@@ -50,7 +49,7 @@ exports.borangPilihReten = function(req, res) {
     if (err) { return next(err); }
     // Successful, so render
     // console.log(listtadika); debug purposes
-    res.render('generatereten', { title: 'Generate Reten', tadikas: listtadika });
+    res.render('generatereten', { title: 'Hasilkan Reten', tadikas: listtadika });
   });
 };
 
@@ -61,6 +60,24 @@ exports.borangPilihReten_post = function(req, res) {
   console.log(req.body.tadikaNama);
   console.log(req.body.jenisReten);
   res.send('Hello ' + x + ' & ' + y);
+};
+
+// Display form for Negeri to give overview
+exports.borangOverview = function(req, res) {
+  // var search = '';
+  // Get all tadikas and kelas
+  Tadika.distinct('createdByNegeri', {nama: new RegExp('')}, function(err, listnegeri) {
+    if (err) { return next(err); }
+    // Successful, so render
+    // console.log(listtadika); debug purposes
+    res.render('overview', { title: 'Overview mengikut negeri', negeri: listnegeri });
+  });
+};
+
+// Post route for borangOverview
+exports.borangOverview_post = async function(req, res, negeri) {
+  await Helper.prepareDocumentLaporan(req, res);
+  countHelper.overView(req, res, negeri);
 };
 
 // Export data in csv format
@@ -95,25 +112,43 @@ exports.pindahDataCSV = function(req, res) {
 
 // Export data in xlsx format
 exports.pindahDataXlsx = async function(req, res) {
-    // let filename = path.join(__dirname, "..", "public", "exports", "CRA.xlsx");
-    // let workbook = new Excel.Workbook();
-    // await workbook.xlsx.readFile(filename);
-    // let worksheet = workbook.getWorksheet('Sheet1');
-    // let row = worksheet.getRow(3);
-    // console.log('done getting row');
-    // row.getCell(1).value = 'alhamdulillah';
-    // row.getCell(2).value = 'subhanAllah';
-    // row.getCell(3).value = 'Allahuakbar';
-    // row.commit();
-    // const dateTime = moment().format('YYYYMMDDhhmmss');
-    // let newfile = path.join(__dirname, "..", "public", "exports", "CRA-" + dateTime + ".xlsx");
-    // await workbook.xlsx.writeFile(newfile);
-    // setTimeout(function () {
-    //   fs.unlinkSync(newfile); // delete this file after 10 seconds
-    // }, 10000)
-    // res.download(newfile);
-    Helper.tryNew(req, res);
-    console.log('done');
+  Tadika.find().sort([['namaPendaftaranTadika', 'ascending']]).exec(function (err, list_budak) {
+    if (err) {
+      return res.status(500).json({ err });
+    }
+    else {
+      let csv
+      try {
+        csv = json2csv(list_budak, { fields });
+      } catch (err) {
+        return res.status(500).json({ err });
+      }
+      const dateTime = moment().format('YYYYMMDDhhmmss');
+      const filePath = path.join(__dirname, "..", "public", "exports", `FullData-${dateTime}.csv`)
+      fs.writeFile(filePath, csv, function (err) {
+        if (err) {
+          return res.json(err).status(500);
+        }
+        else {
+          setTimeout(function () {
+            fs.unlinkSync(filePath); // delete this file after 60 seconds
+          }, 60000)
+          const XLSX_file = path.join(__dirname, "..", "public", "exports", `FullData-${dateTime}.xlsx`);
+          let csvtobook = new Excel.Workbook();
+          csvtobook.csv.readFile(filePath).then(worksheet => {
+            console.log(worksheet.getRow(1).getCell(1).value);
+            csvtobook.xlsx.writeFile(XLSX_file);
+          })          
+          setTimeout(function () {
+            fs.unlinkSync(XLSX_file); // delete this file after 30 seconds
+          }, 30000)
+          setTimeout(function () {
+            res.download(XLSX_file);
+          }, 3000)
+        }
+      });  
+    }
+  })
 }
 
 // Count data and export in xlsx format
@@ -141,49 +176,3 @@ exports.kiradataXlsx = async function(req, res) {
     }
   }
 )};
-
-// Make report for all tadika
-exports.reportforTadika = async (req, res) => {
-  await Helper.prepareDocumentLaporan(req, res);
-  countHelper.kiraKedah(req, res);
-  //console.log(alltheData);
-  // await Helper.prepareDocument(req, res);
-  // Tadika.aggregate([
-  //       { $match: { /* Query can go here, if you want to filter results. */ } } 
-  //     , { $project: { namaTaskaTadikaPendaftaranTadika: 1, createdByKp: 1, createdByDaerah: 1, createdByNegeri: 1 } } /* select the tokens field as something we want to "send" to the next command in the chain */
-  //     , { $unwind: '$namaTaskaTadikaPendaftaranTadika' } /* this converts arrays into unique documents for counting */
-  //     , { $group: { /* execute 'grouping' */
-  //             _id: { tadika: '$namaTaskaTadikaPendaftaranTadika', kp: '$createdByKp', daerah: '$createdByDaerah', negeri: '$createdByNegeri' } /* using the 'token' value as the _id */
-  //           , count: { $sum: 1 } /* create a sum value */
-  //         }
-  //       }
-  //   ], function(err, allResult) {
-  //     console.log('done aggregating');
-  //     let filename = path.join(__dirname, "..", "public", "exports", "blank-template.xlsx");
-  //     let workbook = new Excel.Workbook();
-  //     await workbook.xlsx.readFile(filename);
-  //     let worksheet = workbook.getWorksheet('Sheet1');
-  //     let rowNew = worksheet.getRow(5);
-  //     rowNew.getCell(7).value = allResult.find({})
-  //     rowNew3.getCell(1).value = 'NAMA TADIKA YANG ADA';
-  //     rowNew4.getCell(1).value = 'JUMLAH PELAJAR YANG ADA';
-  //     rowNew5.getCell(1).value = 'JUMLAH KP YANG TERLIBAT';
-  //     rowNew6.getCell(1).value = 'NAMA KP YANG TERLIBAT';
-  //     rowNew7.getCell(1).value = 'Report Generated by Gi-Ret 2.0 on ' + DateNow + ' at ' + TimeNow;
-  //     rowNew2.commit();
-  //     rowNew3.commit();
-  //     rowNew4.commit();
-  //     rowNew5.commit();
-  //     rowNew6.commit();
-  //     rowNew7.commit();
-  //     delete rowNew, rowNew2, rowNew3, rowNew4, rowNew5, rowNew6, rowNew7;
-  //     let newfile = path.join(__dirname, "..", "public", "exports", "blank-template.xlsx");
-  //     await workbook.xlsx.writeFile(newfile);
-  //     console.log('done preparing document');
-  //     res.download(newfile);
-  // });
-};
-
-exports.kiraKedahwei = function(req, res) {
-  countHelper.kiraKedah(req, res);
-};
